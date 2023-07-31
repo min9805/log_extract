@@ -62,7 +62,7 @@ log_time per month     Count     Unique count 
 
 # 현재 진행 상황
 
-1. JIRA 이슈 PULL
+## 1. JIRA 이슈 PULL
 
 ```
 query_params = {
@@ -81,7 +81,7 @@ scheduler.add_job(log_extract_automation, CronTrigger(hour=20))
 - [a] 프로젝트에서 [b] 구성요소를 가지고 있으며 [c], [d] 상태가 아닌 이슈들을 PULL
 - Python apscheduler 를 사용해 오전 10시, 오후 8시 이슈 PULL
 
-2. 이슈의 설명에서 키워드 추출
+## 2. 이슈의 설명에서 키워드 추출
 
 ```
 model = BertModel.from_pretrained(klue/bert-base)
@@ -93,7 +93,7 @@ kw_model = KeyBERT(model)
   - klue : KeyBert 에 들어가는 pretrain 된 모델
 - 키워드 추출 시 일정 중요도 이상의 키워드들만 텍스트 분류
 
-3. 추출된 키워드들을 텍스트 분류
+## 3. 추출된 키워드들을 텍스트 분류
 
 ```
 model = AutoModelForSequenceClassification.from_pretrained(TC_MODEL)
@@ -103,7 +103,7 @@ tokenizer = AutoTokenizer.from_pretrained(TC_MODEL)
 - fine-tuning 한 모델을 사용
   - https://huggingface.co/min9805/bert-base-finetuned-ynat
 
-4. 분류값을 바탕으로 쿼리 생성
+## 4. 분류값을 바탕으로 쿼리 생성
 
 ```
 "0": "action_id:action_a",
@@ -136,7 +136,7 @@ tokenizer = AutoTokenizer.from_pretrained(TC_MODEL)
 필드 : a, b, c, d
 ```
 
-5. JIRA Comment 생성 -> Slack 알림 생성
+## 5. JIRA Comment 생성 -> Slack 알림 생성
 
 - 생성된 쿼리를 통해 ES 에서 데이터 추출 및 CSV 파일 생성
 - 해당 파일과 함께 Slack 알림 생성
@@ -150,18 +150,18 @@ tokenizer = AutoTokenizer.from_pretrained(TC_MODEL)
 
 # 사후 검토 및 회고
 
-1. JIRA 이슈 PULL
+## 1. JIRA 이슈 PULL
 
 - 현재 JIRA 이슈 댓글에 대해서도 추출 및 처리 필요
 - 상위 1개의 이슈에 대해서 추출하기에 시간대에 따른 추가 로직 필요
 - 추출서 양식의 예외 처리
 
-2. 이슈의 설명에서 키워드 추출
+## 2. 이슈의 설명에서 키워드 추출
 
 - 키워드 추출에 대한 Fine-tuning 필요
 - 키워드 추출에 대한 파라미터 테스트 및 필터링할 중요도 설정
 
-3. 추출된 키워드들을 텍스트 분류
+## 3. 추출된 키워드들을 텍스트 분류
 
 - 텍스트 분류에 대한 Fine-tuning 필요
 - 모든 쿼리를 학습 불가능
@@ -169,11 +169,11 @@ tokenizer = AutoTokenizer.from_pretrained(TC_MODEL)
     ex) "result_a에 진입한 ... " -> 0 : "action_body_result" -> action_body_result = "result_a"
 - 텍스트 분류 시 일정한 분류값에 대해서 필터링 필요
 
-4. 분류값을 바탕으로 쿼리 생성
+## 4. 분류값을 바탕으로 쿼리 생성
 
 - 추출하는 값과 집계하는 값
 
-5. JIRA Comment 생성 -> Slack 알림 생성
+## 5. JIRA Comment 생성 -> Slack 알림 생성
 
 - Slack 에 interactive message 를 사용해 jira 에 댓글 업로드
 
