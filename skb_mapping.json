@@ -1,6 +1,8 @@
 {
     "0": "action_id:click.top_gnb.app_menu",
-    "1": "page_id:home",
-    "2": "device_model:BIP-AI100",
-    "3": "action_body.result:잼키즈"
+    "1": "action_id:page_show",
+    "2": "action_id:rcu_event",
+    "3": "page_id:home",
+    "4": "action_body.result:잼키즈",
+    "5": "action_body.result:유튜브"
 }
